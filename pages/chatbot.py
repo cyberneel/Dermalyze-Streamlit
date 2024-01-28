@@ -7,6 +7,13 @@ model = GPT4All("gpt4all-falcon-newbpe-q4_0.gguf")
 
 #st.write(model.generate("Who is superman"))
 
+st.set_page_config(
+        page_title="Dermalyze",
+        page_icon="images/avatar.png",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+
 def show_messages(text):
     messages_str = [
         f"{_['role']}: {_['content']}" for _ in st.session_state["messages"][1:]

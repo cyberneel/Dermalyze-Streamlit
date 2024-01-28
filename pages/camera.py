@@ -10,6 +10,13 @@ from results import print_pred
 from results import Predict
 from io import BytesIO
 
+st.set_page_config(
+        page_title="Dermalyze",
+        page_icon="images/avatar.png",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+
 def save_file(uploaded_file):
     file_name = uploaded_file.name
     file_path = os.path.join("images", file_name)
