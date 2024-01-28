@@ -42,4 +42,6 @@ def Predict(uploaded_image, keys, model, data, var=True):
     prediction = model.predict(img.reshape(1,32,32,3))
     print(prediction)
 
+    st.link_button("Research Articles!", "https://scholar.google.com/scholar?hl=en&q=" + keys[prediction.argmax()].replace("/", "+"))
+
     return keys[prediction.argmax()],data[keys[prediction.argmax()]]['description'],data[keys[prediction.argmax()]]['symptoms'],data[keys[prediction.argmax()]]['causes'],data[keys[prediction.argmax()]]['treatement-1'],data[keys[prediction.argmax()]]['product']
