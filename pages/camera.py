@@ -8,14 +8,6 @@ import cv2
 from PIL import Image
 from results import print_pred
 
-if __name__ == '__main__':
-    st.set_page_config(
-        page_title="Dermalyze",
-        page_icon="image/avatar.png",
-        layout="wide",
-        initial_sidebar_state="expanded"
-    )
-
 def title():
     col1, mid, col2 = st.columns([1,1.62,20])
     with col1:
@@ -41,21 +33,19 @@ data = json.load(f)
 keys = list(data)
 
 
-
-uploaded_image = st.file_uploader("Upload Image (jpg)")
-img = None
-if uploaded_image is not None:
-    img = uploaded_image
+capimgs = st.camera_input('Take a picture')
+if capimgs is not None:
+    image = st.image(capimgs)
     
     
 def Predict(image):
     # Save the file to a directory
-    with open(os.path.join("images", uploaded_image.name),"wb") as f:
-        f.write(uploaded_image.getbuffer())
-    st.success("Saved file: " + uploaded_image.name)
+    with open(os.path.join("images", capimgs.name),"wb") as f:
+        f.write(capimgs.getbuffer())
+    st.success("Saved file: " + capimgs.name)
 
     # Load an image using PIL
-    img = Image.open("images/" + uploaded_image.name)
+    img = Image.open("images/" + capimgs.name)
 
     # Convert it to a numpy array
     img = np.array(img)
@@ -66,12 +56,10 @@ def Predict(image):
 
     return keys[prediction.argmax()],data[keys[prediction.argmax()]]['description'],data[keys[prediction.argmax()]]['symptoms'],data[keys[prediction.argmax()]]['causes'],data[keys[prediction.argmax()]]['treatement-1']
 
-if img is not None:
-    pred = Predict(img)
-
+if image is not None:
+    pred = Predict(image)
+    
     print_pred(pred)
-
-
 
 
 
