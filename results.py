@@ -14,7 +14,7 @@ def print_pred(pred):
     st.markdown(f'''<u>**Info:**</u> <br> <li>{pred[1]}</li>''', unsafe_allow_html=True)
     st.markdown(f'''<u>**Symptoms:**</u> <br> <li>{pred[2]}</li>''', unsafe_allow_html=True) 
     st.markdown(f'''<u>**Causes:**</u> <br> <li>{pred[3]}</li>''', unsafe_allow_html=True)
-    st.markdown(f'''<u>**More Infor:**</u> <br> <li>{pred[4]}</li>''', unsafe_allow_html=True)
+    st.markdown(f'''<u>**More Info:**</u> <br> <li>{pred[4]}</li>''', unsafe_allow_html=True)
 
 def Predict(uploaded_image, keys, model, data, var=True):
     # Save the file to a directory
