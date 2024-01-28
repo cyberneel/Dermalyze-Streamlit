@@ -32,7 +32,7 @@ data = json.load(f)
 
 keys = list(data)
 
-
+image = None
 capimgs = st.camera_input('Take a picture')
 if capimgs is not None:
     image = st.image(capimgs)

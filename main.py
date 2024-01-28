@@ -11,7 +11,7 @@ from results import print_pred
 if __name__ == '__main__':
     st.set_page_config(
         page_title="Dermalyze",
-        page_icon="image/avatar.png",
+        page_icon="😊",
         layout="wide",
         initial_sidebar_state="expanded"
     )
