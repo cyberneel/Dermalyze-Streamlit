@@ -7,6 +7,7 @@ import json
 import cv2
 from PIL import Image
 from results import print_pred
+from results import Predict
 
 def title():
     col1, mid, col2 = st.columns([1,1.62,20])
@@ -35,29 +36,11 @@ keys = list(data)
 image = None
 capimgs = st.camera_input('Take a picture')
 if capimgs is not None:
-    image = st.image(capimgs)
+    image = capimgs
     
-    
-def Predict(image):
-    # Save the file to a directory
-    with open(os.path.join("images", capimgs.name),"wb") as f:
-        f.write(capimgs.getbuffer())
-    st.success("Saved file: " + capimgs.name)
-
-    # Load an image using PIL
-    img = Image.open("images/" + capimgs.name)
-
-    # Convert it to a numpy array
-    img = np.array(img)
-
-    img = cv2.resize(img, (32,32)) / 255.0
-    prediction = model.predict(img.reshape(1,32,32,3))
-    print(prediction)
-
-    return keys[prediction.argmax()],data[keys[prediction.argmax()]]['description'],data[keys[prediction.argmax()]]['symptoms'],data[keys[prediction.argmax()]]['causes'],data[keys[prediction.argmax()]]['treatement-1']
 
 if image is not None:
-    pred = Predict(image)
+    pred = Predict(image, keys, model, data)
     
     print_pred(pred)
 

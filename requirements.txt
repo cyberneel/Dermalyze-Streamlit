@@ -4,3 +4,6 @@ Pillow
 streamlit
 numpy
 tqdm
+gpt4all
+gpt4all-j
+streamlit-option-menu
