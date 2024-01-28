@@ -5,6 +5,7 @@ import numpy as np
 from tqdm import tqdm
 import json
 import cv2
+import io
 from PIL import Image
 
 def print_pred(pred):
@@ -15,14 +16,24 @@ def print_pred(pred):
     st.markdown(f'''<u>**Causes:**</u> <br> <li>{pred[3]}</li>''', unsafe_allow_html=True)
     st.markdown(f'''<u>**More Infor:**</u> <br> <li>{pred[4]}</li>''', unsafe_allow_html=True)
 
-def Predict(uploaded_image, keys, model, data):
+def Predict(uploaded_image, keys, model, data, var=True):
     # Save the file to a directory
-    with open(os.path.join("images", uploaded_image.name),"wb") as f:
-        f.write(uploaded_image.getbuffer())
-    st.success("Saved file: " + uploaded_image.name)
+    tmp = None
+    if var:
+        tmp = uploaded_image.name
+    else:
+        tmp = uploaded_image
+    with open(os.path.join("images", tmp),"wb") as f:
+        if var:
+            f.write(uploaded_image.getbuffer())
+        else:
+            buffer_t = io.BytesIO()
+            Image.open(uploaded_image).save(buffer_t, format='JPEG')
+            f.write(buffer_t.getbuffer())
+    st.success("Saved file: " + tmp)
 
     # Load an image using PIL
-    img = Image.open("images/" + uploaded_image.name)
+    img = Image.open("images/" + tmp)
 
     # Convert it to a numpy array
     img = np.array(img)
