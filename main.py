@@ -22,7 +22,7 @@ def title():
 
 st.set_page_config(
         page_title="Dermalyze",
-        page_icon="\images\avatar.ico",
+        page_icon="🖐🏼",
         layout="wide",
         initial_sidebar_state="expanded"
     )
